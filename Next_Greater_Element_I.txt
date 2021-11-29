@@ -1,3 +1,5 @@
+Next Greater Element I leetcode solution
+
 The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.
 
 You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.
@@ -39,6 +41,7 @@ All the integers of nums1 also appear in nums2.
 
 
 hashmap solution
+3ms 
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int [] result=new int[nums1.length];
