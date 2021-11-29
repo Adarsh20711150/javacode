@@ -1,0 +1,84 @@
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+ 
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+Example 4:
+
+Input: s = "([)]"
+Output: false
+Example 5:
+
+Input: s = "{[]}"
+Output: true
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of parentheses only '()[]{}'.
+
+
+
+
+
+VALID PARENTHESES JAVA CODE 
+2mS
+class Solution {
+    public boolean isValid(String s) {
+        
+        //if string is having odd number of elements then its definitely not hving valid parenthesis
+        //if found a closing parenthesis pop up that and check if the stack is empty or not if is empty then definitely have only the closing parenthesis and not the opening one therefore not valid
+        // if closing parenthesis of any type comes in then check for imideate opening parenthesis of same type
+        // after all this if the stack is still not empty then it is not valid 
+        if((s.length() & 1) ==1)
+            return false;
+       Stack<Character> stack=new Stack<>();
+        for(int i=0;i<s.length();i++)
+        {
+            stack.push(s.charAt(i));
+            if(stack.peek()==')')
+            {
+                stack.pop();
+                if(stack.isEmpty())
+                    return false;
+                if(stack.pop()!='(')
+                    return false;
+            }
+            else if(stack.peek()==']')
+            {
+                stack.pop();
+                if(stack.isEmpty())
+                    return false;
+                if(stack.pop()!='[')
+                    return false;
+            }
+            else if(stack.peek()=='}')
+            {
+                stack.pop();
+                if(stack.isEmpty())
+                    return false;
+                if(stack.pop()!='{')
+                    return false;
+            }
+        }
+        if(stack.size()!=0)
+            return false;
+        return true;
+    }
+}
