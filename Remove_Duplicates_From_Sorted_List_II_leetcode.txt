@@ -1,0 +1,83 @@
+82. Remove Duplicates from Sorted List II
+Medium
+
+3967
+
+137
+
+Add to List
+
+Share
+Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,3,3,4,4,5]
+Output: [1,2,5]
+Example 2:
+
+
+Input: head = [1,1,1,2,3]
+Output: [2,3]
+ 
+
+Constraints:
+
+The number of nodes in the list is in the range [0, 300].
+-100 <= Node.val <= 100
+The list is guaranteed to be sorted in ascending order.
+
+
+Java solution 
+VERY BRUTE FORCE 
+4ms 
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        Map<Integer,Integer> map=new HashMap<>();
+        while(head!=null)
+        {
+            if(map.containsKey(head.val))
+            {
+                map.replace(head.val,map.get(head.val)+1);
+            }
+            else
+            {
+                map.put(head.val,1);
+            }
+            head=head.next;
+        }
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int num: map.keySet())
+        {
+            if(map.get(num)==1)
+            {
+                list.add(num);
+            }
+        }
+        ListNode node=new ListNode();
+        ListNode n=node;
+        Collections.sort(list);
+        for(int i=0;i<list.size();i++)
+        {
+            ListNode newnode=new ListNode(list.get(i),null);
+            node.next=newnode;
+            node=node.next;
+        }
+        return n.next;
+    }
+}
